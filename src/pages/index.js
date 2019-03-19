@@ -6,7 +6,6 @@ import SEO from "../components/seo"
 export default class index extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       user: {}
     }
@@ -17,8 +16,8 @@ export default class index extends Component {
       <Layout>
         <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
         <h1>Olá</h1>
-        <p>Welcome to your new Gatsby site.</p>
-        <p>Now go build something great.</p>
+        <p>Este é um exemplo de uso de recursos do Firebase</p>
+        <p>(para dummies)</p>
         <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
           <Image />
         </div>

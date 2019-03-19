@@ -27,7 +27,7 @@ export default class ProfileForm extends Component {
         console.log(this.state)
         e.preventDefault();
     }
-
+    
     render() {
         return (
             <form>

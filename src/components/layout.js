@@ -36,9 +36,12 @@ const Layout = ({ children }) => (
         >
           <main>{children}</main>
           <footer>
-            © {new Date().getFullYear()}, Built with
+            © {new Date().getFullYear()}, Feito com: 
             {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
+            <a href="https://www.gatsbyjs.org">Gatsby</a>,&nbsp;
+            <a href="https://www.styled-components.com/">Styled Components</a>,&nbsp;
+            <a href="https://firebase.google.com/">Firebase</a>&nbsp;e&nbsp;
+            <a href="https://reactjs.org/">React</a>
           </footer>
         </div>
       </>

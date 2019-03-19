@@ -1,34 +1,23 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
-import fire, { logOut, authListener } from '../config/fire'
+import { userIsOn, logOut, authListener } from '../config/fire'
 import styled from 'styled-components' 
 
-const styledMenu = styled.div`
+const MainMenu = styled.div`
     display: flex;
-    flex-direction: column;
-    & a {
-        color: white;
-        text-decoration: none;
-    }
-    ${props => props.loggedUser && css`
-        color: yellow;
-    `}
+    flex-direction: row;
 ` 
 
-const defaultMenu = () => (
-    <React.Fragment>
-        <Link to="/"><a>Index</a></Link>
-        <Link to="/page-2/"><a>Page 2</a></Link>
-    </React.Fragment>
-)
-
-const userMenu = () => (
-    <React.Fragment>
-            <a onClick={logOut}>Logout</a>
-            <Link to="/profile/"><a>Seu perfil</a></Link>
-    </React.Fragment>
-)
-
+const MenuItem = styled.span` 
+    font-size: 20px;
+    font-weight: normal;
+    padding: 0;
+    cursor: pointer;
+    margin: 0 10px 0 0 !important;
+    color: ${props => props.userIsOff ? "cyan" 
+                    : props.userIsOn  ? "yellow" 
+                    : "white" };  
+`
 
 export default class Nav extends Component {
 
@@ -41,17 +30,32 @@ export default class Nav extends Component {
     }
 
 componentDidMount () {
-        let currentUserUID = localStorage.getItem('user')
-        if (currentUserUID) { this.setState ( { user: currentUserUID })}
-        this.authListener()
+        if (userIsOn) { authListener() }
  }
   
   render() {
     return (
-        <styledMenu>
-          <defaultMenuItemns />            
-          { this.state.user !== '' ? <userMenu /> : <></> }
-        </styledMenu>
+        <MainMenu>
+            <Link to="/"><MenuItem>Index</MenuItem></Link>
+            <Link to="/page-2/"><MenuItem>Page 2</MenuItem></Link>
+            { !userIsOn
+              ?<Link to="/login/">
+                    <MenuItem userIsOff>
+                        Login<span role="img" aria-label="yellor locker">🔒</span>
+                    </MenuItem>
+                </Link>
+              :<> 
+                <MenuItem onClick={logOut} userIsOn>
+                    Logout<span role="img" aria-label="little running man">🏃🏼</span>
+                </MenuItem>
+                <Link to="/profile/">
+                    <MenuItem userIsOn>
+                        Seu perfil<span role="img" aria-label="little man chest up using suit and tie">👨‍💼</span>
+                    </MenuItem>
+                </Link>
+               </>
+            }
+        </MainMenu>
     )
   }
 }
